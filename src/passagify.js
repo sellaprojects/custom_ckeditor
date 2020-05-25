@@ -67,11 +67,15 @@ export default class Passagify extends Plugin {
                             const cell1 = table.getChild(i).getChild(0).getChild(0);
                             const cell2 = table.getChild(i).getChild(1).getChild(0);
                             const text=selectedText.substr(start,charsPerRow)
-                            writer.insertText(i+1,cell1,i);
+                            if((i+1)%5 === 0) {
+                                writer.insertText((i+1)+"",cell1,0);
+                                writer.createSelection(cell1,0)
+                                editor.execute( 'fontSize', { value: 'tiny' } );
+                            }
                             
                             console.log("INSERTING TEXT "+ text);
                             
-                            writer.insertText(text,cell2,i);
+                            writer.insertText(text,cell2,0);
                             
                             
                         }
