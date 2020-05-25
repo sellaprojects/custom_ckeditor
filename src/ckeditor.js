@@ -46,6 +46,7 @@ import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
+import Passagify from './passagify'
 export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
@@ -90,7 +91,8 @@ ClassicEditor.builtinPlugins = [
 	TableToolbar,
 	TextTransformation,
 	MathType,
-	Alignment
+	Alignment,
+	Passagify
 ];
 
 // Editor configuration.
@@ -114,6 +116,7 @@ ClassicEditor.defaultConfig = {
 			'fontBackgroundColor',
 			'alignment',
 			'highlight',
+			'passagify',
 			'|',
 			'code',
 			'link',
@@ -135,6 +138,7 @@ ClassicEditor.defaultConfig = {
 			'|',
 			'horizontalLine',
 			'pageBreak'
+
 		]
 	},
 	image: {
