@@ -5,6 +5,7 @@ import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableUtils from '@ckeditor/ckeditor5-table/src/tableutils'
 export default class Passagify extends Plugin {
     init() {
         const editor = this.editor;
@@ -38,8 +39,46 @@ export default class Passagify extends Plugin {
                              
                          }
 
-                         console.log(editor);             
-                         editor.model.deleteContent(editor.model.document.selection);
+                        console.log(editor);
+                         
+                        editor.model.deleteContent(editor.model.document.selection);
+
+                        const tableUtils=new TableUtils();
+                        const charsPerRow = Math.floor(intTableWidth*60 / 300); 
+                        const rowsNum=Math.ceil(selectedText.length/charsPerRow);
+                        console.log("table width : " + intTableWidth);
+                        console.log("CharsPerRow: "+ charsPerRow);
+                        console.log("rowsNum: "+ rowsNum);
+                        
+                        
+                        
+                        let start=0;
+
+                        const table=tableUtils.createTable(writer,rowsNum,2);
+                        const firstCell1=table.getChild(0).getChild(0).getChild(0);
+                        const firstCell2=table.getChild(0).getChild(1).getChild(0);
+                        writer.insertText('line',firstCell1,0);
+                        writer.insertText(selectedText.substr(start,charsPerRow),firstCell2,0);
+                        
+                        for(let i=1;i<rowsNum;i++){
+                            start=start+charsPerRow;
+                            console.log("start: "+ start);
+                            
+                            const cell1 = table.getChild(i).getChild(0).getChild(0);
+                            const cell2 = table.getChild(i).getChild(1).getChild(0);
+                            const text=selectedText.substr(start,charsPerRow)
+                            writer.insertText(i+1,cell1,i);
+                            
+                            console.log("INSERTING TEXT "+ text);
+                            
+                            writer.insertText(text,cell2,i);
+                            
+                            
+                        }
+                        console.log("setting the table");
+                        console.log(table);
+                        
+                        editor.model.insertContent(table);
                     });
                 }catch(err){
                     console.log(err);
