@@ -103,6 +103,7 @@
     "@ckeditor/ckeditor5-page-break": "^18.0.0",
     "@ckeditor/ckeditor5-remove-format": "^18.0.0",
     "@ckeditor/ckeditor5-special-characters": "^18.0.0",
-    "@wiris/mathtype-ckeditor5": "^7.20.0"
+    "@wiris/mathtype-ckeditor5": "^7.20.0",
+    "babel-eslint": "^10.1.0"
   }
 }
